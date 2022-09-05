@@ -27,7 +27,7 @@ function TemporaryName() {
     </ol>
 
     <footer className="footer">
-    &copy
+    <small> &#169; Abdullla al Rakib.All rights reserved.</small>
     </footer>
   </div>);
 }
