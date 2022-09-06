@@ -11,3 +11,5 @@ function App() {
   );
 }
 export default App;
+
+// Multiple Ways of Async Await Fetch API Call With Hooks (useState, useEffect) & Map | React JS
