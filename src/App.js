@@ -1,13 +1,13 @@
-import React from 'react';
-import AxiosData from './Components/AxiosData';
+import logo from './logo.svg';
+import ReactPractice from './Components/ReactPractice';
+import './App.css';
+import './index.css';
 
-function App(){
-    return (
-        <div>
-            <AxiosData/>
-        </div>
-    )
+function App() {
+  return (
+    <div>
+      <ReactPractice />
+    </div>
+  );
 }
-
-
 export default App;

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-
 import axios from 'axios'
 
 function AxiosData() {
@@ -16,12 +15,12 @@ function AxiosData() {
     }, []);
     return (
         <div>
-            <h1>{post.id}</h1>
+            {/* <h5>{post.id }</h5>
             <h3>{post.title}</h3>
-            <p>{post.body}</p>
+            <p>{post.body}</p> */}
             
         </div>
     )
 }
 
-export default AxiosData
+export default AxiosData;
