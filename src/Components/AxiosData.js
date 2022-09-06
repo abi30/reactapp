@@ -16,8 +16,9 @@ function AxiosData() {
     }, []);
     return (
         <div>
-            <h3>title : {post.title}</h3>
-            <p>body : {post.body}</p>
+            <h1>{post.id}</h1>
+            <h3>{post.title}</h3>
+            <p>{post.body}</p>
             
         </div>
     )
