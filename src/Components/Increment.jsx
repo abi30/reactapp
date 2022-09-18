@@ -8,6 +8,8 @@ function Increment() {
 
   return (
     <div>
+    <ul id = "fruits">
+    </ul>
       <h1 id="display">{counter}</h1>
       <div>
         <Button id="button" onClick={()=>setCounter(counter + 1)}>
