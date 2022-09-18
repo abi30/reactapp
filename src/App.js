@@ -1,87 +1,56 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Button, Badge} from "react-bootstrap";
+import { Card} from "react-bootstrap/Card";
+import "bootstrap/dist/css/bootstrap.min.css";
 import AdressenComponent from './Components/AdressenComponent.js';
 import KundeComponent from './Components/KundeComponent.js';
 import KontaktdatenComponent from './Components/KontaktdatenComponent.js';
-import axios from 'axios';
+import AllcontractsComponent from "./Components/AllcontractsComponent.js";
 import './App.css';
 import './index.css';
 
 
 function App() {
 
-  // const [data1, setData1] = useState('');
-  // const [data2, setData2] = useState('');
-  // const [data3, setData3] = useState('');
+  const [data, setData] = useState('');
+ 
   
-  // useEffect(() => {
-  //   fetchDataByAxios1();
-  //   fetchDataByAxios2();
-  //   fetchDataByAxios3();
-  // },[]);
+  useEffect(() => {
+    fetchData();
+  },[]);
 
 //   let access_token ='Bearer lRsbmPsO9rSbubQcYddgtEc---iYxZo-suJdWah_RgE.w0zklauZBj9Y1BavoObYNYGHXSfjvTXzsj5vTNE4yUA';
 
-//   const fetchDataByAxios1 = async () => {
-//     let response = await axios({
-//       mehtod: 'get',
-//       url: '/5004333890',
-//       headers: {
-//         'Access-Control-Allow-Origin': '*',
-//         'Authorization': access_token,
-//         'Content-Type': 'application/x-www-form-urlencoded',
-//       },
+  const fetchData = async () => {
+    let response = await axios({
+      mehtod: "get",
+      url: "https://api.publicapis.org/entries",
+    })
+      .then((response) => {
+        const allData = response.data;
+        setData(allData);
+        console.log(data);
+        console.log(allData);
+      })
+      .catch((error) => console.error(`Error:${error}`));
+    console.log(window.location.href)
+  };
 
-//     }).then((response) => {
-//       const allData = response.data;
-//       setData1(allData);
-//       console.log(allData);
-//     }).catch(error => console.error(`Error:${error}`));
-//     console.log(window.location.href)
-//   };
-
-
-
-//   const fetchDataByAxios3 = async () => {
-//     let response = await axios({
-//       mehtod: 'get',
-//       url: '/5004333890/kontaktdaten',
-//       headers: {
-//         'Access-Control-Allow-Origin': '*',
-//         'Authorization': access_token,
-//         'Content-Type': 'application/x-www-form-urlencoded',
-//       },
-
-//     }).then((response) => {
-//       const allData3 = response.data;
-//       setData3(allData3);
-//       console.log(allData3);
-//     }).catch(error => console.error(`Error:${error}`));
-//     console.log(window.location.href)
-//   };
-
-//   var currentDate = new Date();
-// console.log(currentDate);
-// var month = currentDate.getMonth()+1;
-// if (month < 10) month = "0" + month;
-// var dateOfMonth = currentDate.getDate();
-// if (dateOfMonth < 10) dateOfMonth = "0" + dateOfMonth;
-// var year = currentDate.getFullYear();
-// var formattedDate = dateOfMonth + "/" + month + "/" + year;
-// console.log(formattedDate);
-  
-  // 'Content-Type': 'application/json',
-  // baseURL: 'https://mitarbeiterwebservice.maklerinfo.biz/service/ari/employee/1.0/rest/Alpha0_BQ5G3X/kunden'
 
   return (
     <div>
-      <KundeComponent/>
+      <KundeComponent />
       <AdressenComponent />
-      <KontaktdatenComponent/>
+      <KontaktdatenComponent />
+      <AllcontractsComponent />
     </div>
-
   );
 }
 export default App;
 
 // Multiple Ways of Async Await Fetch API Call With Hooks (useState, useEffect) & Map | React JS
 
+// https://react-bootstrap.github.io/components/cards/
+// https://bobbyhadz.com/blog/react-module-not-found-cant-resolve-react-bootstrap
+// https://create-react-app.dev/docs/adding-bootstrap/

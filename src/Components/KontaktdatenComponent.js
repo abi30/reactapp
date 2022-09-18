@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 
+
 function KontaktdatenComponent() {
 
   const [data, setData] = useState('');
@@ -11,23 +12,27 @@ function KontaktdatenComponent() {
     fetchDataByAxios();
   },[]);
 
-  let access_token ='Bearer lRsbmPsO9rSbubQcYddgtEc---iYxZo-suJdWah_RgE.w0zklauZBj9Y1BavoObYNYGHXSfjvTXzsj5vTNE4yUA';
+  let access_token =
+    "Bearer e-nfkLZhsGau32fvRTsYvb7z5tgR8BljEqlDl6Y_kS4.Rjmt-iw_pg_KRJE4Ckc0Tji4Mp4cF2GxrN3DUdjFlLg";
 
   const fetchDataByAxios = async () => {
     let response = await axios({
-      mehtod: 'get',
-      url: '/5004333890/kontaktdaten',
+      mehtod: "GET",
+      url: "/kunden/5004333890/kontaktdaten",
       headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Authorization': access_token,
-        'Content-Type': 'application/x-www-form-urlencoded',
+        "Access-Control-Allow-Origin": "*",
+        "Authorization": access_token,
+        "Content-Type": "application/json",
+        // "Content-Type": "application/x-www-form-urlencoded",
       },
-
-    }).then((response) => {
-      const allData = response.data;
-      setData(allData);
-      console.log(allData);
-    }).catch(error => console.error(`Error:${error}`));
+    })
+      .then((response) => {
+        console.log(response);
+        const allData = response.data;
+        setData(allData);
+        console.log(allData);
+      })
+      .catch((error) => console.error(`Error:${error}`));
     console.log(window.location.href)
   };
 
@@ -44,35 +49,32 @@ function KontaktdatenComponent() {
             
             data.map((data) => {
               return (
-
-                <div key={data.Id} className="container d-flex justify-content-center align-items-center">
-
+                <div
+                  key={data.Id}
+                  className="container d-flex justify-content-center align-items-center"
+                >
                   <div className="card">
-
                     <div className="upper">
-
-                      <img src="https://i.imgur.com/Qtrsrk5.jpg" className="img-fluid" />
-
+                      <img
+                        src="https://i.imgur.com/Qtrsrk5.jpg"
+                        className="img-fluid"
+                        alt="holle test"
+                      />
                     </div>
 
                     <div className="user text-center">
-
                       <div className="profile">
-
-                        <img src="https://i.imgur.com/JgYD2nQ.jpg" className="rounded-circle" width="80" />
-
+                        <img
+                          src="https://i.imgur.com/JgYD2nQ.jpg"
+                          className="rounded-circle"
+                          width="80"
+                          alt="holle test"
+                        />
                       </div>
-
                     </div>
-
-
-                    
-
                   </div>
-
                 </div>
-
-              )})
+              );})
             ) : (<h3>No data yet</h3>)
         }
       </div>
