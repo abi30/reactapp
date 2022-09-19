@@ -9,7 +9,7 @@ function AdressenComponent() {
         fetchDataByAxios();
     }, []);
 
-    let access_token = 'Bearer lRsbmPsO9rSbubQcYddgtEc---iYxZo-suJdWah_RgE.w0zklauZBj9Y1BavoObYNYGHXSfjvTXzsj5vTNE4yUA';
+    let access_token = 'Bearer A2f8snrawRhyNMfcTi0A05QMA9zGqVUaOQ7FB2MYh40.R2A5QwVYA2JuKd-NMdZIdwEqvpnHcB4biamyIjnDQVE';
 
     const fetchDataByAxios = async () => {
         let response = await axios({
@@ -22,9 +22,9 @@ function AdressenComponent() {
             },
 
         }).then((response) => {
+            console.log(response);
             const allData = response.data;
             setData(allData);
-            console.log(allData);
         }).catch(error => console.error(`Error:${error}`));
         console.log(window.location.href)
     };

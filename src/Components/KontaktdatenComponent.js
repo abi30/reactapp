@@ -4,14 +4,14 @@ import axios from 'axios';
 
 function KontaktdatenComponent() {
 
-  const [data, setData] = useState('');
+  const [data, setData] = useState([]);
  
   
   useEffect(() => {
     fetchDataByAxios();
   },[]);
 
-  let access_token ='Bearer lRsbmPsO9rSbubQcYddgtEc---iYxZo-suJdWah_RgE.w0zklauZBj9Y1BavoObYNYGHXSfjvTXzsj5vTNE4yUA';
+  let access_token ='Bearer A2f8snrawRhyNMfcTi0A05QMA9zGqVUaOQ7FB2MYh40.R2A5QwVYA2JuKd-NMdZIdwEqvpnHcB4biamyIjnDQVE';
 
   const fetchDataByAxios = async () => {
     let response = await axios({

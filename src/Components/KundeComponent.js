@@ -3,16 +3,15 @@ import axios from 'axios';
 
 function KundeComponent() {
 
-  const [data, setData] = useState('');
- 
-  
-  useEffect(() => {
-    fetchDataByAxios();
+  const [data, setData] = useState([]);
+      useEffect(() => {
+     fetchDataByAxios();
   },[]);
 
-  let access_token ='Bearer lRsbmPsO9rSbubQcYddgtEc---iYxZo-suJdWah_RgE.w0zklauZBj9Y1BavoObYNYGHXSfjvTXzsj5vTNE4yUA';
+  let access_token ='Bearer A2f8snrawRhyNMfcTi0A05QMA9zGqVUaOQ7FB2MYh40.R2A5QwVYA2JuKd-NMdZIdwEqvpnHcB4biamyIjnDQVE';
 
   const fetchDataByAxios = async () => {
+    
     let response = await axios({
       mehtod: 'get',
       url: '/5004333890',
@@ -32,15 +31,15 @@ function KundeComponent() {
 
 
 
-var currentDate = new Date();
-console.log(currentDate);
-var month = currentDate.getMonth()+1;
-if (month < 10) month = "0" + month;
-var dateOfMonth = currentDate.getDate();
-if (dateOfMonth < 10) dateOfMonth = "0" + dateOfMonth;
-var year = currentDate.getFullYear();
-var formattedDate = dateOfMonth + "/" + month + "/" + year;
-console.log(formattedDate);
+        var currentDate = new Date();
+        console.log(currentDate);
+        var month = currentDate.getMonth()+1;
+        if (month < 10) month = "0" + month;
+        var dateOfMonth = currentDate.getDate();
+        if (dateOfMonth < 10) dateOfMonth = "0" + dateOfMonth;
+        var year = currentDate.getFullYear();
+        var formattedDate = dateOfMonth + "/" + month + "/" + year;
+        console.log(formattedDate);
   
   // 'Content-Type': 'application/json',
   // baseURL: 'https://mitarbeiterwebservice.maklerinfo.biz/service/ari/employee/1.0/rest/Alpha0_BQ5G3X/kunden'
@@ -49,14 +48,12 @@ console.log(formattedDate);
     
     
       <div>
-        {
+        {/* {
           data ? (
             
             // data.map((data) => {
               // return ()});
-
-    
-         <div key={data.Id} className="row contacts">
+          <div key={data.Id} className="row contacts">
             <div id="client-details" className="col-md invoice-to vcard">
                <p className="to">
                      <strong>&nbsp;Herr&nbsp;{data.Person.Vorname} &nbsp; {data.Person.Nachname}</strong>
@@ -70,7 +67,7 @@ console.log(formattedDate);
          </div>
 
         ) : (<h3>No data yet</h3>)
-    }
+    } */}
       </div>
 
   );
