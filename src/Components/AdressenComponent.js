@@ -12,9 +12,6 @@ function AdressenComponent() {
   let access_token =
     "Bearer e-nfkLZhsGau32fvRTsYvb7z5tgR8BljEqlDl6Y_kS4.Rjmt-iw_pg_KRJE4Ckc0Tji4Mp4cF2GxrN3DUdjFlLg";
 
-<<<<<<< HEAD
-    let access_token = 'Bearer A2f8snrawRhyNMfcTi0A05QMA9zGqVUaOQ7FB2MYh40.R2A5QwVYA2JuKd-NMdZIdwEqvpnHcB4biamyIjnDQVE';
-=======
   const fetchDataByAxios = async () => {
     let response = await axios({
       mehtod: "GET",
@@ -36,7 +33,6 @@ function AdressenComponent() {
       });
     console.log(window.location.href);
   };
->>>>>>> 61cf386c353964422edbf29a055c8adf96f53409
 
   // 'Content-Type': 'application/json',
   // baseURL: 'https://mitarbeiterwebservice.maklerinfo.biz/service/ari/employee/1.0/rest/Alpha0_BQ5G3X/kunden'
