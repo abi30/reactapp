@@ -25,7 +25,7 @@ const decrement = (value)=>{
 
 // initial state
 const initialState = {
-    value: 0,
+    value: 1,
 };
 
 
@@ -58,7 +58,6 @@ const render = () => {
 render();
 
 store.subscribe(render);
-
 
 
 // button click listeners
