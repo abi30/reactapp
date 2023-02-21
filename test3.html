@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Shopping Cart</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/redux@latest/dist/redux.min.js"></script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script>
+      /*
+       * How is the next application state calculated,
+       * given the current state and the action?
+       */
+      const counters = (state = [], action) => {
+        switch (action.type) {
+          case "ADD_COUNTER":
+            return [...state, 0];
+          case "REMOVE_COUNTER":
+            return state.slice(0, -1);
+          case "INCREMENT":
+            return [
+              ...state.slice(0, action.num),
+              state[action.num] + 1,
+              ...state.slice(action.num + 1),
+            ];
+          case "DECREMENT":
+            return [
+              ...state.slice(0, action.num),
+              state[action.num] - 1,
+              ...state.slice(action.num + 1),
+            ];
+          default:
+            return state;
+        }
+      };
+
+      /*
+       * What does UI look like, assuming it doesn't know
+       * about the state or actions, and is a function
+       * of the props?
+       */
+      const Counter = ({ value, onIncrement, onDecrement }) =>
+        <div>
+          <h1>{value}</h1>
+          <button onClick={onIncrement}>+</button>
+          <button onClick={onDecrement}>-</button>
+        </div>;
+
+      const CounterProductor = ({ onAdd, onRemove }) =>
+        <div>
+          <button onClick={onAdd}>Add counter</button>
+          <button onClick={onRemove}>Remove counter</button>
+        </div>;
+
+      const Counters = ({ number }) =>
+        <div>
+          {Array.from(Array(number)).map((n, i) => (
+            <Counter
+              value={store.getState()[i]}
+              onIncrement={((i) => () => {
+                store.dispatch({
+                  type: "INCREMENT",
+                  num: i,
+                });
+              })(i)}
+              onDecrement={((i) => () => {
+                store.dispatch({
+                  type: "DECREMENT",
+                  num: i,
+                });
+              })(i)}
+            />
+          ))}
+        </div>;
+
+      class Container extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            number: 0,
+          };
+        }
+        render() {
+          return <div>
+              <Counters number={this.state.number} />
+              <hr />
+              <CounterProductor
+                onAdd={() => {
+                  this.setState({ number: this.state.number + 1 });
+                  store.dispatch({
+                    type: "ADD_COUNTER",
+                  });
+                }}
+                onRemove={() => {
+                  if (this.state.number <= 0) {
+                    return;
+                  }
+                  this.setState({ number: this.state.number - 1 });
+                  store.dispatch({
+                    type: "REMOVE_COUNTER",
+                  });
+                }}
+              />
+            </div>;
+        }
+      }
+
+      const logger = (theStore) => (next) => (action) => {
+        const result = next(action);
+        logState(theStore);
+        return result;
+      };
+      /*
+       * Let's create a store.
+       */
+      const { createStore, applyMiddleware } = Redux;
+      const store = createStore(counters, applyMiddleware(logger));
+
+      /*
+       * Render the app with the current state.
+       */
+
+      function logState(theStore) {
+        console.log(`
+  ${"-".repeat(16)}
+  current state:
+  [${theStore.getState()}]
+  `);
+      }
+
+      let counterNumber = 0;
+
+      const render = () => {
+        ReactDOM.render(<Container />, document.getElementById("root"));
+      };
+
+      /*
+       * Render now and every time state changes.
+       */
+      store.subscribe(render);
+
+      render();
+      logState(store);
+    </script>
+  </body>
+</html>
