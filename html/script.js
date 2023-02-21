@@ -3,9 +3,13 @@
 //  const counterEl = document.getElementById("counter");
 //  const incrementEl = document.getElementById("increment");
 //  const decrementEl = document.getElementById("decrement");
- const addmatchbtn = document.querySelector("button.btn:first-of-type");
+ const addmatchbtn = document.querySelector(".lws-addMatch");
+ const resetEl = document.querySelector(".lws-reset");
+ const incrementForms = document.querySelectorAll(".incrementForm");
+const decrementForms = document.querySelectorAll(".decrementForm");
+const singleResults = document.querySelectorAll(".lws-singleResult");
  
-// addmatchbtn.addEventListener('click', addMatch1);
+
 
 const addmatchContainer = document.querySelector("div.all-matches");
   let matchCount = 1;
@@ -34,11 +38,11 @@ const addmatchContainer = document.querySelector("div.all-matches");
           <div class="inc-dec">
             <form class="incrementForm">
               <h4>Increment</h4>
-              <input type="number" name="increment${matchCount}" class="lws-increment" />
+              <input type="number" name="increment" class="lws-increment" />
             </form>
             <form class="decrementForm">
               <h4>Decrement</h4>
-              <input type="number" name="decrement${matchCount}" class="lws-decrement" />
+              <input type="number" name="decrement" class="lws-decrement" />
             </form>
           </div>
           <div class="numbers">
@@ -49,15 +53,6 @@ const addmatchContainer = document.querySelector("div.all-matches");
   addmatchContainer.appendChild(matchForm);
   }
 
-
-
-
-
-
-const incrementForms = document.querySelectorAll(".incrementForm");
-const decrementForms = document.querySelectorAll(".decrementForm");
-const singleResults = document.querySelectorAll(".lws-singleResult");
-const resetEl = document.querySelector(".lws-reset");
 
 
 const INCREMENT = "increment";
@@ -74,7 +69,7 @@ const increment = (value) => {
 const decrement = (value) => {
   return {
     type: DECREMENT,
-    payload: value,
+    payload: value
   };
 };
 
@@ -95,8 +90,6 @@ const reset = () => {
       payload: item
     };
   };
-  // { id: 1, defValue: 0 };
-
 
 // initial state
 const initialState = {value:0};
@@ -105,8 +98,7 @@ const initialState = {value:0};
 function counterReducer(state = initialState, action) {
   if (action.type === "increment") {
     if(action.payload){
-      console.log(initialState);
-      console.log(action.payload);
+
         return {
           ...state,
           value: state.value + action.payload,
@@ -144,7 +136,7 @@ const render = () => {
   singleResults.forEach((result) => {
     // state.forEach((match) => {
       // console.log(match);
-      result.innerText = state.value;
+      result.innerText =state.value;
     // });
     // result.innerText = state.value.toString();
     console.log(`Form submitted decrement: ${result}`);
@@ -154,16 +146,16 @@ const render = () => {
 // update UI initially
 render();
 // render(store.getState().matches);
-
 store.subscribe(render);
-// store.subscribe(() => {
-//   const state = store.getState()
-//   render(state.matches)
-// })
 
 
 
-let incrementId =1;
+
+
+
+// button click listeners
+
+let incrementId =0;
 incrementForms.forEach((form) => {
   incrementId++;
     form.addEventListener("submit", (event) => {
@@ -185,18 +177,16 @@ decrementForms.forEach((form) => {
   });
 
 
-// button click listeners for add match
 addmatchbtn.addEventListener("click", () => addMatch1());
-// button click listeners
-// incrementEl.addEventListener("click", () => {
-//   store.dispatch(increment(2));
-// });
+
 resetEl.addEventListener("click", () => {
   store.dispatch(reset());
 });
 
 
-
+// incrementEl.addEventListener("click", () => {
+//   store.dispatch(increment(2));
+// });
 // decrementEl.addEventListener("click", () => {
 //   store.dispatch(decrement(1));
 // });
