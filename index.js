@@ -1,6 +1,7 @@
 const { createStore, applyMiddleware } = require("redux");
 const { delayActionMiddleware,
-    fetchTodosMiddleware} = require("./middlewares");
+    fetchAsyncMiddleware} = require("./middlewares");
+const {fetchTodos} = require("./functions");
 
 const initialState = {
   todos: [],
@@ -30,7 +31,7 @@ const todoReducer = (state = initialState, action) => {
 
 // const store = createStore(todoReducer);
 const store = createStore(todoReducer,applyMiddleware( delayActionMiddleware,
-    fetchTodosMiddleware));
+    fetchAsyncMiddleware));
 
 store.subscribe(() => {
   console.log(store.getState());
@@ -41,8 +42,10 @@ store.subscribe(() => {
 //   payload: "Learn Redux",
 // });
 
+// store.dispatch({
+//     type: "todos/fetchTodos",
+// });
 
-store.dispatch({
-    type: "todos/fetchTodos",
-});
+// here we are put the fetchTodos function as a body does not return anything
+store.dispatch(fetchTodos);
 
