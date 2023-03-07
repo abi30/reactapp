@@ -8,16 +8,19 @@ const initialState ={
 const counterSlice = createSlice({
     name:"counter",
     initialState,
-    redeucers : {
-        increment : (state,action) =>{
+    reducers : {
+        increment: (state,action) =>{
             state.count++;
         },
-        decrement : (state,action) =>{
+        decrement: (state,action) =>{
             state.count--;
         },
     },
 });
+
+
 module.exports = counterSlice.reducer;
 module.exports.counterActions = counterSlice.actions;
+
 
 
