@@ -1,4 +1,4 @@
-const createSlice = require('@reduxjs/toolkit').createSlice;
+const {createSlice} = require('@reduxjs/toolkit');
 
 // initial state
 const initialState ={
