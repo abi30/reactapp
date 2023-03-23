@@ -11,12 +11,13 @@ const initialState = {
   error: "",
 };
 // async thunk created
-export const fetchblogs = createAsyncThunk('blogs/getblogs',async () => {
-    const blogs = await getblogs();
+export const fetchblogs = createAsyncThunk('blogs/getblogs',async ({sort,filterBySave}) => {
+    const blogs = await getblogs(sort,filterBySave);
     // console.log(blogs);
     return blogs;
   }
 );
+
 export const fetchSavedBlogs = createAsyncThunk('blogs/getSavedBlogs',async () => {
     const blogs = await getSavedBlogs();
     console.log(blogs);

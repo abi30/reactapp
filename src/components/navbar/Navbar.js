@@ -1,10 +1,9 @@
 
 import LWSBlog from "../../assets/images/LWSBlog.svg";
 import { Link } from "react-router-dom";
-
 export default function  Navbar(){
-    return (
 
+    return (
 // <!-- navbar start  -->
 <nav className="py-4 border-b">
 <div className="navbar-container">

@@ -1,21 +1,66 @@
 
 
-import React ,{useEffect} from 'react';
+import React ,{useEffect,useState} from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import { fetchSavedBlogs,fetchblogs } from "../../features/blogs/blogsSlice";
+import { Link, useMatch, useNavigate } from "react-router-dom";
+import { isSavedToggle,sortBy } from "../../features/filter/filterSlice";
+
+
+
+
 export default function SortFilter() {
-  const disPatch = useDispatch();
+
+  const dispatch = useDispatch();
+  
+  const { sort } = useSelector((state) => state.filter);
   const {isFilter} = useSelector((state) => state.blogs);
 
-  // useEffect(()=>{
-  //   disPatch(fetchSavedBlogs());
-  // },[disPatch]);
+  const [input, setInput] = useState(sort);
+
+  const match = useMatch("/");
+  const navigate = useNavigate();
+
   const handleSortBySaved = () => {
-    disPatch(fetchSavedBlogs());
+    dispatch(fetchSavedBlogs());
   };
   const handleSortByAll = () => {
-    disPatch(fetchblogs());
+    dispatch(fetchblogs());
   };
+  
+  const handleSortChange = (event) => {
+    event.preventDefault();
+    setInput(event.target.value);
+    console.log(input);
+    dispatch(sortBy(input));
+    // You can also dispatch an action to update the state in Redux
+
+    if (!match) {
+      navigate("/");
+    }
+  };
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(sortBy(input));
+
+    // if user is not in home page, redirect to home page
+    if (!match) {
+        navigate("/");
+    }
+};
+
+
+
+  
+  
+  
+    // useEffect(()=>{
+    //   disPatch(fetchSavedBlogs());
+    // },[disPatch]);
+
+
     return (
         <aside>
           <div className="sidebar-items">
@@ -24,6 +69,9 @@ export default function SortFilter() {
               <select
                 name="sort"
                 id="lws-sort"
+                onChange={handleSortChange}
+                // onChange={(e) => setInput(e.target.value)}
+                value={input}
                 className="w-full max-w-[150px] border-2 rounded-md text-gray-500"
               >
                 <option value="">Default</option>
@@ -65,5 +113,11 @@ export default function SortFilter() {
         </aside>
     );
 };
+
+
+
+
+
+    
 
 

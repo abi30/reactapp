@@ -1,5 +1,5 @@
 import { createSlice ,createAsyncThunk} from "@reduxjs/toolkit";
-import { getBlog } from "./blogAPI";
+import { getBlog,updateSave, updateLike} from "./blogAPI";
 
 
 
@@ -17,6 +17,21 @@ export const fetchBlog = createAsyncThunk('blog/fetchBlog',async (id) => {
    return blog;
   }
 );
+
+export const changeSaveStatus = createAsyncThunk('blogs/changeSaveStatus',async ({id,isSaved}) => {
+  const blogs = await updateSave(id,isSaved);
+  console.log(blogs);
+  return blogs;
+}
+);
+export const likeBlog = createAsyncThunk('blogs/likeBlog',async ({id,currentLike}) => {
+  const blogs = await updateLike(id, currentLike);
+  console.log(blogs);
+  return blogs;
+}
+);
+
+
 
 const blogSlice = createSlice({
 name:"blog",

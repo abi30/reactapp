@@ -11,12 +11,13 @@ import Error  from '../components/ui/Error';
 
 export default function Blog() {
   const dispatch = useDispatch();
-  const {blogId} = useParams();
- 
+  const params = useParams();
+  
   const {blog,isLoading,isError,error}=useSelector(state=>state.blog);
   useEffect(()=>{
+    const {blogId} = params;
     dispatch(fetchBlog(blogId));
-  },[dispatch,blogId]);
+  },[dispatch,params]);
 
   const {id,tags } = blog || {};
 

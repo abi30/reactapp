@@ -1,16 +1,19 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
+import { changeSaveStatus,likeBlog} from "../../features/blog/blogSlice";
 
 export default function BlogDescription({blog}) {
 
-  const {
-    title,
-    description,
-    image,
-    tags,
-    likes,
-    isSaved,
-    createdAt,
-  } = blog || {};
+  const {id, title,description,  image, tags,likes,isSaved,createdAt,} = blog || {};
+  const dispatch = useDispatch();
+
+  const handleLike=()=>{
+    dispatch(likeBlog({id,currentLike:likes}));
+  }
+
+  const toggleSave = ()=>{
+    dispatch(changeSaveStatus({id,isSaved:!isSaved}));
+  };
 
   let content =null;
   if(tags?.length > 0){
@@ -31,13 +34,13 @@ export default function BlogDescription({blog}) {
         {/* <LikeSaved/> */}
         <div className="btn-group">
         {/* <!-- handle like on button click --> */}
-          <button className="like-btn" id="lws-singleLinks">
+          <button onClick={handleLike} className="like-btn" id="lws-singleLinks">
             <i className="fa-regular fa-thumbs-up"></i>{likes}
           </button>
 
 
-          <button className="save-btn" id="lws-singleSavedBtn">
-            <i className="fa-regular fa-bookmark"></i> {`${isSaved ? 'saved' : 'save'}`}
+          <button onClick={toggleSave} className={isSaved ? 'active save-btn' : 'save-btn'}  id="lws-singleSavedBtn">
+            <i className="fa-regular fa-bookmark"></i>{isSaved ? 'saved' : 'save'}
           </button>
       </div>
 
