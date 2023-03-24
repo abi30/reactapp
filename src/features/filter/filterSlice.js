@@ -13,12 +13,12 @@ const filterSlice = createSlice({
             state.filterBySave = !state.filterBySave
           },
 
-           isSavedToggleSelected: (state, action) => {
+        isSavedToggleSelected: (state, action) => {
             //  state.filterBySave = !state.filterBySave
              state.filterBySave = action.payload
              // state.tags.push(action.payload);
             },
-            isSavedToggleRemoved: (state, action) => {
+        isSavedToggleRemoved: (state, action) => {
             state.filterBySave = false
             // const indexToRemove = state.tags.indexOf(action.payload);
             // if (indexToRemove !== -1) {
