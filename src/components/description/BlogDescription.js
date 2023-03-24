@@ -1,23 +1,28 @@
-import React from 'react'
-import { useDispatch } from 'react-redux';
-import { changeSaveStatus,likeBlog} from "../../features/blog/blogSlice";
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+
+import { fetchBlog,changeSaveStatus,likeBlog} from "../../features/blog/blogSlice";
 
 export default function BlogDescription({blog}) {
 
   const {id, title,description,  image, tags,likes,isSaved,createdAt,} = blog || {};
   const dispatch = useDispatch();
+  // isSaved = useSelector(state => state.blogPosts.find(post => post.id === id).isSaved);
+  
+  // useEffect(()=>{
+  //   dispatch(fetchBlog(id));
+  // },[dispatch,id]);
 
   const handleLike=()=>{
     dispatch(likeBlog({id,currentLike:likes}));
   }
-
   const toggleSave = ()=>{
     dispatch(changeSaveStatus({id,isSaved:!isSaved}));
   };
 
   let content =null;
   if(tags?.length > 0){
-    content = tags.map((tag,index)=> <span key={tag.index}>#{tag} </span>); 
+    content = tags.map((tag,index)=> <span key={`tag-${index}`}>#{tag} </span>); 
   }
   return (
     <main className="post">

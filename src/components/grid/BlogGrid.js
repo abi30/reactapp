@@ -11,10 +11,11 @@ import {fetchblogs} from "../../features/blogs/blogsSlice";
 export default function BlogGrid() {
   const disPatch = useDispatch();
   const {blogs,isLoading,isError,error}=useSelector(state=>state.blogs);
+  const {sort,filterBySave} = useSelector((state)=>state.filter)
 
   useEffect(()=>{
-    disPatch(fetchblogs());
-  },[disPatch]);
+    disPatch(fetchblogs({sort,filterBySave}));
+  },[disPatch,sort,filterBySave]);
 
   //decide what to render 
   let content;

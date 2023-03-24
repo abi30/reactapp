@@ -12,22 +12,20 @@ const initialState = {
 // async thunk created
 export const fetchBlog = createAsyncThunk('blog/fetchBlog',async (id) => {
     const blog = await getBlog(id);
-    console.log('helo');
-    console.log(blog);
    return blog;
   }
 );
 
-export const changeSaveStatus = createAsyncThunk('blogs/changeSaveStatus',async ({id,isSaved}) => {
-  const blogs = await updateSave(id,isSaved);
-  console.log(blogs);
-  return blogs;
+export const changeSaveStatus = createAsyncThunk('blog/changeSaveStatus',async ({id,isSaved}) => {
+  const blog = await updateSave({id,isSaved});
+  console.log(blog);
+  return blog;
 }
 );
-export const likeBlog = createAsyncThunk('blogs/likeBlog',async ({id,currentLike}) => {
-  const blogs = await updateLike(id, currentLike);
-  console.log(blogs);
-  return blogs;
+export const likeBlog = createAsyncThunk('blog/likeBlog',async ({id,currentLike}) => {
+  const blog = await updateLike({id, currentLike});
+  console.log(blog);
+  return blog;
 }
 );
 

@@ -12,7 +12,6 @@ const initialState = {
 // async thunk created
 export const fetchRelatedBlogs = createAsyncThunk('relatedBlogs/fetchRelatedBlogs',async ({tags,id}) => {
     const relatedVideos = await getRelatedBlogs({tags,id});
-    console.log(relatedVideos);
     return relatedVideos;
   }
 );

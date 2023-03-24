@@ -6,7 +6,7 @@ import { fetchRelatedBlogs } from "../../features/relatedBlogs/relatedBlogsSlice
 
 import { useDispatch, useSelector } from "react-redux";
 export default function RelatedBlogList({currentBlogId, tags }) {
-  console.log({ currentBlogId, tags });
+  // console.log({ currentBlogId, tags });
   const dispatch = useDispatch();
   const { relatedBlogs,isLoading,isError,error}=  useSelector(state=>state.relatedBlogs);
  
@@ -14,8 +14,6 @@ export default function RelatedBlogList({currentBlogId, tags }) {
     dispatch(fetchRelatedBlogs({ tags, id: currentBlogId }));
   }, [dispatch,tags,currentBlogId]);
 
-  console.log('test');
-  console.log(relatedBlogs);
 
   let content =null;
 
@@ -30,7 +28,9 @@ export default function RelatedBlogList({currentBlogId, tags }) {
     content =  <div className="col-span-12">No relatedvideos found !</div>;
   }
   if(!isLoading && !isError && relatedBlogs?.length > 0){
-    content = relatedBlogs.map((blog)=><RelatedBlogListItem key={blog.id} blog={blog}/>); 
+    content = relatedBlogs.map((blog)=>{
+      // console.log(blog.id);
+    return <RelatedBlogListItem key={blog.id} blog={blog}/>}); 
 
   }
  

@@ -2,7 +2,7 @@
 
 import React ,{useEffect,useState} from 'react';
 import { useDispatch,useSelector } from 'react-redux';
-import { fetchSavedBlogs,fetchblogs } from "../../features/blogs/blogsSlice";
+import { fetchblogs } from "../../features/blogs/blogsSlice";
 import { Link, useMatch, useNavigate } from "react-router-dom";
 import { isSavedToggle,sortBy } from "../../features/filter/filterSlice";
 
@@ -10,55 +10,33 @@ import { isSavedToggle,sortBy } from "../../features/filter/filterSlice";
 
 
 export default function SortFilter() {
-
+  const match = useMatch("/");
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  
-  const { sort } = useSelector((state) => state.filter);
-  const {isFilter} = useSelector((state) => state.blogs);
+  const { sort, filterBySave} = useSelector((state) => state.filter);
 
   const [input, setInput] = useState(sort);
 
-  const match = useMatch("/");
-  const navigate = useNavigate();
-
-  const handleSortBySaved = () => {
-    dispatch(fetchSavedBlogs());
-  };
-  const handleSortByAll = () => {
-    dispatch(fetchblogs());
-  };
   
+
+  // const handleSortBySaved = () => {
+  //   dispatch(fetchSavedBlogs());
+  // };
+  const handleSortByAll = (filterBySave) => {
+    dispatch(isSavedToggle(filterBySave));
+  };
+
   const handleSortChange = (event) => {
     event.preventDefault();
-    setInput(event.target.value);
-    console.log(input);
-    dispatch(sortBy(input));
-    // You can also dispatch an action to update the state in Redux
-
+    const selectedSort = event.target.value;
+    setInput(selectedSort);
+    dispatch(sortBy(selectedSort));
+  
     if (!match) {
       navigate("/");
     }
   };
 
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(sortBy(input));
-
-    // if user is not in home page, redirect to home page
-    if (!match) {
-        navigate("/");
-    }
-};
-
-
-
-  
-  
-  
-    // useEffect(()=>{
-    //   disPatch(fetchSavedBlogs());
-    // },[disPatch]);
 
 
     return (
@@ -69,9 +47,8 @@ export default function SortFilter() {
               <select
                 name="sort"
                 id="lws-sort"
-                onChange={handleSortChange}
-                // onChange={(e) => setInput(e.target.value)}
                 value={input}
+                onChange={handleSortChange}
                 className="w-full max-w-[150px] border-2 rounded-md text-gray-500"
               >
                 <option value="">Default</option>
@@ -89,7 +66,7 @@ export default function SortFilter() {
                     id="lws-all"
                     name="isFilter"
                     value="all"
-                   checked={isFilter === 'all'}
+                   checked={filterBySave === false}
                     onChange={()=>handleSortByAll()}
                     className="radio"
            
@@ -101,8 +78,8 @@ export default function SortFilter() {
                     type="radio"
                     name="isFilter"
                     value="all"
-                   checked={isFilter === 'saved'}
-                  onChange={()=>(handleSortBySaved())}
+                   checked={filterBySave === true}
+                  onChange={()=>(handleSortByAll())}
                     className="radio"
                   />
                   <label htmlFor="lws-saved">Saved</label>

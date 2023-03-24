@@ -2,7 +2,7 @@ const { createSlice } = require("@reduxjs/toolkit");
 
 const initialState = {
     sort:"",
-    isSaved:false,
+    filterBySave:false,
 };
 
 const filterSlice = createSlice({
@@ -10,10 +10,9 @@ const filterSlice = createSlice({
     initialState,
     reducers: {
         isSavedToggle:(state,action) =>{
-            state.isSaved = !state.isSaved
+            state.filterBySave = !state.filterBySave
           },
         sortBy: (state, action) => {
-            console.log(action.payload);
             state.sort = action.payload;
         },
     },

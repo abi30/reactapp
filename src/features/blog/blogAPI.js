@@ -11,8 +11,11 @@ export const updateLike = async ({id,currentLike})=>{
         return response.data;
 }
 export const updateSave = async ({id,isSaved})=>{
-    const response = await axios.get(`/blogs/${id}`,{
+    console.log(id);
+    const response = await axios.patch(`/blogs/${id}`,{
         isSaved
     })
-        return response.data;
+    const updatedBlogPost = { ...response.data, isSaved };
+        return updatedBlogPost;
+        // return response.data;
 }
