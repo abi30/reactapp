@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchBlog,changeSaveStatus,likeBlog} from "../../features/blog/blogSlice";
@@ -9,9 +9,15 @@ export default function BlogDescription({blog}) {
   const dispatch = useDispatch();
   // isSaved = useSelector(state => state.blogPosts.find(post => post.id === id).isSaved);
   
+  const [saveValue, setSaveValue] = useState(isSaved);
+  const [likeValue, setLikeValue] = useState(likes);
+
   // useEffect(()=>{
   //   dispatch(fetchBlog(id));
   // },[dispatch,id]);
+  useEffect(() => {
+    setSaveValue(isSaved);
+  }, [isSaved]);
 
   const handleLike=()=>{
     dispatch(likeBlog({id,currentLike:likes}));
@@ -19,6 +25,23 @@ export default function BlogDescription({blog}) {
   const toggleSave = ()=>{
     dispatch(changeSaveStatus({id,isSaved:!isSaved}));
   };
+  const handleToggleSave = (isSaved) => {
+    const selectedSort = !isSaved;
+    setSaveValue(selectedSort);
+    dispatch(changeSaveStatus({ id, isSaved: selectedSort }));
+    console.log(selectedSort);
+  
+    // if (!match) {
+    //   navigate("/");
+    // }
+  };
+
+
+
+
+
+
+
 
   let content =null;
   if(tags?.length > 0){
@@ -44,7 +67,13 @@ export default function BlogDescription({blog}) {
           </button>
 
 
-          <button onClick={toggleSave} className={isSaved ? 'active save-btn' : 'save-btn'}  id="lws-singleSavedBtn">
+          <button 
+          // onClick={handleToggleSave}
+          onClick={() => handleToggleSave(isSaved)}
+          name="isSaved"
+          value={saveValue}
+          className={isSaved ? 'active save-btn' : 'save-btn'}  
+          id="lws-singleSavedBtn">
             <i className="fa-regular fa-bookmark"></i>{isSaved ? 'saved' : 'save'}
           </button>
       </div>

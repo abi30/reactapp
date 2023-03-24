@@ -11,7 +11,7 @@
         "react"
       ],
       "likes": 8,
-      "isSaved": false,
+      "isSaved": true,
       "createdAt": "2020-07-15"
     },
     {
@@ -82,7 +82,7 @@
         "css"
       ],
       "likes": 44,
-      "isSaved": false,
+      "isSaved": true,
       "createdAt": "2022-01-23"
     },
     {
