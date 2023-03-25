@@ -1,44 +1,30 @@
-import React, { useEffect,useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchBlog,changeSaveStatus,likeBlog} from "../../features/blog/blogSlice";
+import { useDispatch } from 'react-redux';
+import {changeSaveStatus,likeBlog} from "../../features/blog/blogSlice";
 
 export default function BlogDescription({blog}) {
 
-  const {id, title,description,  image, tags,likes,isSaved,createdAt,} = blog || {};
   const dispatch = useDispatch();
-  // isSaved = useSelector(state => state.blogPosts.find(post => post.id === id).isSaved);
+  const {id, title,description,  image, tags,likes,isSaved,createdAt,} = blog;
+ 
   
-  const [saveValue, setSaveValue] = useState(isSaved);
-  const [likeValue, setLikeValue] = useState(likes);
-
-  // useEffect(()=>{
-  //   dispatch(fetchBlog(id));
-  // },[dispatch,id]);
-  useEffect(() => {
-    setSaveValue(isSaved);
-  }, [isSaved]);
-
   const handleLike=()=>{
     dispatch(likeBlog({id,currentLike:likes}));
   }
-  const toggleSave = ()=>{
+  
+  const handleToggleSave = ()=>{
     dispatch(changeSaveStatus({id,isSaved:!isSaved}));
   };
-  const handleToggleSave = (isSaved) => {
-    const selectedSort = !isSaved;
-    setSaveValue(selectedSort);
-    dispatch(changeSaveStatus({ id, isSaved: selectedSort }));
-    console.log(selectedSort);
-  
-    // if (!match) {
-    //   navigate("/");
-    // }
-  };
+ 
 
 
-
-
+   // const [saveValue, setSaveValue] = useState(isSaved);
+  // const handleToggleSave = (isSaved) => {
+  //   const selectedSort = !isSaved;
+  //   setSaveValue(selectedSort);
+  //   dispatch(changeSaveStatus({ id, isSaved: selectedSort }));
+  //   console.log(selectedSort);
+  // };
 
 
 
@@ -68,10 +54,10 @@ export default function BlogDescription({blog}) {
 
 
           <button 
-          // onClick={handleToggleSave}
-          onClick={() => handleToggleSave(isSaved)}
+          onClick={handleToggleSave}
+          // onClick={() => handleToggleSave(isSaved)}
           name="isSaved"
-          value={saveValue}
+          value={isSaved}
           className={isSaved ? 'active save-btn' : 'save-btn'}  
           id="lws-singleSavedBtn">
             <i className="fa-regular fa-bookmark"></i>{isSaved ? 'saved' : 'save'}

@@ -5,21 +5,19 @@ export const getBlog = async (id)=>{
         return response.data;
 }
 export const updateLike = async ({id,currentLike})=>{
-    const response = await axios.get(`/blogs/${id}`,{
+    const response = await axios.patch(`/blogs/${id}`,{
         likes:currentLike +1
     });
-        return response.data;
+        return response.data.likes;
 }
 export const updateSave = async ({id,isSaved})=>{
-    // console.log(id);
-    // console.log(isSaved);
-    // if(isSaved===false){
-    //     isSaved=true;
-        
-    //     console.log(isSaved);
-    // }
+    
     const response = await axios.patch(`/blogs/${id}`,{isSaved});
-    const updatedBlogPost = { ...response.data, isSaved };
-        return updatedBlogPost;
-        // return response.data;
+    // const {data} = response;
+    // console.log(response.data);
+    // console.log(data);
+    // const updatedBlogPost = { ...response.data, isSaved };
+           
+        // return updatedBlogPost;
+        return response.data.isSaved;
 }
